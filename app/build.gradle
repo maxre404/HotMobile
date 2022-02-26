@@ -49,6 +49,10 @@ android {
             buildConfigField "String", "HOST", "\"https://www.rrtrx.com\""
             applicationId "com.hm.trx.miner"
         }
+        lazada{
+            buildConfigField "String", "HOST", "\"https://www.mydada.net\""
+            applicationId "com.hm.lazada.ecs"
+        }
     }
     applicationVariants.all { variant ->
         variant.outputs.all {
