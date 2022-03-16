@@ -20,8 +20,8 @@ android {
         applicationId "com.mobile.makemoney"
         minSdk 21
         targetSdk 31
-        versionCode 4
-        versionName "1.0.5"
+        versionCode 5
+        versionName "1.0.6"
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
         flavorDimensions "versionCode"
@@ -46,7 +46,7 @@ android {
             buildConfigField "String", "HOST", "\"https://www.luckyobfind.com\""
         }
         miner{
-            buildConfigField "String", "HOST", "\"https://www.rrtrx.com\""
+            buildConfigField "String", "HOST", "\"https://rrtrx.com/login?code=017448\""
             applicationId "com.hm.trx.miner"
         }
         lazada{
