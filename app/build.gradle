@@ -20,7 +20,7 @@ android {
         applicationId "com.mobile.makemoney"
         minSdk 21
         targetSdk 31
-        versionCode 8
+        versionCode 10
         versionName "1.0."+versionCode
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -52,6 +52,10 @@ android {
         lazada{
             buildConfigField "String", "HOST", "\"https://www.mydada.net\""
             applicationId "com.hm.lazada.ecs"
+        }
+        otto{
+            buildConfigField "String", "HOST", "\"https://www.ottook.com\""
+            applicationId "com.xm.otto.aem"
         }
     }
     applicationVariants.all { variant ->
