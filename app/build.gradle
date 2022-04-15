@@ -20,7 +20,7 @@ android {
         applicationId "com.mobile.makemoney"
         minSdk 21
         targetSdk 31
-        versionCode 12
+        versionCode 14
         versionName "1.0."+versionCode
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -56,6 +56,10 @@ android {
         otto{
             buildConfigField "String", "HOST", "\"https://www.ottook.com\""
             applicationId "com.xm.otto.aem"
+        }
+        louis{
+            buildConfigField "String", "HOST", "\"https://www.louis-e-commerce.com\""
+            applicationId "com.om.louis.esc"
         }
     }
     applicationVariants.all { variant ->
