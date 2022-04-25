@@ -20,7 +20,7 @@ android {
         applicationId "com.mobile.makemoney"
         minSdk 21
         targetSdk 31
-        versionCode 14
+        versionCode 15
         versionName "1.0."+versionCode
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -58,7 +58,7 @@ android {
             applicationId "com.xm.otto.aem"
         }
         louis{
-            buildConfigField "String", "HOST", "\"https://www.louis-e-commerce.com\""
+            buildConfigField "String", "HOST", "\"https://www.louis-e-commerce.com/?source=app\""
             applicationId "com.om.louis.esc"
         }
     }
