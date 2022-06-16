@@ -14,12 +14,12 @@ android {
             storePassword '123456'
         }
     }
-    compileSdk 31
+    compileSdk 32
 
     defaultConfig {
         applicationId "com.mobile.makemoney"
         minSdk 21
-        targetSdk 31
+        targetSdk 32
         versionCode 14
         versionName "1.0."+versionCode
 
@@ -60,6 +60,10 @@ android {
         louis{
             buildConfigField "String", "HOST", "\"https://www.louis-e-commerce.com\""
             applicationId "com.om.louis.esc"
+        }
+        kalynda{
+            buildConfigField "String", "HOST", "\"https://www.kalynda-e-commerce.com/#/pages/views/login/index?isapp=1\""
+            applicationId "com.kd.kalynda.otc"
         }
     }
     applicationVariants.all { variant ->
