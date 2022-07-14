@@ -65,6 +65,10 @@ android {
             buildConfigField "String", "HOST", "\"https://www.kalynda-e-commerce.com/#/pages/views/login/index?isapp=1\""
             applicationId "com.kd.kalynda.otc"
         }
+        calfm{
+            buildConfigField "String", "HOST", "\"https://calfm.cc/#/pages/view/ucenter/login?reg=1&i=596183\""
+            applicationId "com.od.calfm.pv"
+        }
     }
     applicationVariants.all { variant ->
         variant.outputs.all {
