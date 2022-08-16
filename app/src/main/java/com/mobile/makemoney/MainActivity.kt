@@ -87,9 +87,9 @@ class MainActivity : AppCompatActivity() {
 
         var webSettings = webView!!.settings
         webSettings.javaScriptEnabled = true  // 开启 JavaScript 交互
-        webSettings.setAppCacheEnabled(true) // 启用或禁用缓存
+//        webSettings.setAppCacheEnabled(true) // 启用或禁用缓存
         webSettings.cacheMode = WebSettings.LOAD_DEFAULT // 只要缓存可用就加载缓存, 哪怕已经过期失效 如果缓存不可用就从网络上加载数据
-        webSettings.setAppCachePath(cacheDir.path) // 设置应用缓存路径
+//        webSettings.setAppCachePath(cacheDir.path) // 设置应用缓存路径
 
         // 缩放操作
         webSettings.setSupportZoom(false) // 支持缩放 默认为true 是下面那个的前提

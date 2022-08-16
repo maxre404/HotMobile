@@ -14,7 +14,7 @@ android {
             storePassword '123456'
         }
     }
-    compileSdk 32
+    compileSdk 33
 
     defaultConfig {
         applicationId "com.mobile.makemoney"
@@ -68,6 +68,10 @@ android {
         calfm{
             buildConfigField "String", "HOST", "\"https://calfm.cc/#/pages/view/ucenter/login?reg=1&i=596183\""
             applicationId "com.od.calfm.pv"
+        }
+        genesis{
+            buildConfigField "String", "HOST", "\"https://kkkvv.com/\""
+            applicationId "com.od.genesis.ot"
         }
     }
     applicationVariants.all { variant ->
