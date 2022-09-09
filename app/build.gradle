@@ -62,7 +62,7 @@ android {
             applicationId "com.om.louis.esc"
         }
         kalynda{
-            buildConfigField "String", "HOST", "\"https://www.noah-e-commerce.com/#/pages/views/login/index?isapp=1\""
+            buildConfigField "String", "HOST", "\"https://www.kalynda-e-commerce.com/#/pages/views/login/index?isapp=1\""
             applicationId "com.kd.kalynda.otc"
         }
         calfm{
@@ -72,6 +72,10 @@ android {
         genesis{
             buildConfigField "String", "HOST", "\"https://kkkvv.com/\""
             applicationId "com.od.genesis.ot"
+        }
+        noah{
+            buildConfigField "String", "HOST", "\"https://www.noah-e-commerce.com/#/pages/views/login/index?isapp=1/\""
+            applicationId "com.fr.noah.ah"
         }
     }
     applicationVariants.all { variant ->
