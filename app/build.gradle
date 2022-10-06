@@ -20,7 +20,7 @@ android {
         applicationId "com.mobile.makemoney"
         minSdk 21
         targetSdk 32
-        versionCode 15
+        versionCode 16
         versionName "1.0."+versionCode
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -76,6 +76,10 @@ android {
         noah{
             buildConfigField "String", "HOST", "\"https://www.noah-e-commerce.com/#/pages/views/login/index?isapp=1/\""
             applicationId "com.fr.noah.ah"
+        }
+        mtbtc{
+            buildConfigField "String", "HOST", "\"https://666088.mtbtc.com/\""
+            applicationId "com.xx.mtbtc.ok"
         }
     }
     applicationVariants.all { variant ->
