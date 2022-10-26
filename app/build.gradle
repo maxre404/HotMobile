@@ -73,13 +73,21 @@ android {
             buildConfigField "String", "HOST", "\"https://kkkvv.com/\""
             applicationId "com.od.genesis.ot"
         }
-        noah{
+        noah {
             buildConfigField "String", "HOST", "\"https://www.noah-e-commerce.com/#/pages/views/login/index?isapp=1/\""
             applicationId "com.fr.noah.ah"
         }
-        mtbtc{
+        mtbtc {
             buildConfigField "String", "HOST", "\"https://666088.mtbtc.com/\""
             applicationId "com.xx.mtbtc.ok"
+        }
+        aladdin {
+            buildConfigField "String", "HOST", "\"https://www.aladdin-ecommerce.com/#/pages/views/login/index?isapp=1/\""
+            applicationId "com.tt.aladdin.jk"
+        }
+        louren {
+            buildConfigField "String", "HOST", "\"https://lourentrade.com/\""
+            applicationId "com.ot.louren.xk"
         }
     }
     applicationVariants.all { variant ->
