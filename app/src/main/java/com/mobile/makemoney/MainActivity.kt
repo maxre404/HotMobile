@@ -1,41 +1,42 @@
 package com.mobile.makemoney
 
 import android.content.ActivityNotFoundException
-import android.net.http.SslError
-import android.os.Build
-import androidx.appcompat.app.AppCompatActivity
-import android.os.Bundle
-import android.view.View
-import android.webkit.*
-import java.net.URISyntaxException
-
-import android.content.pm.ResolveInfo
-
 import android.content.Intent
 import android.net.Uri
+import android.net.http.SslError
+import android.os.Build
+import android.os.Bundle
+import android.provider.MediaStore
 import android.util.Log
 import android.view.KeyEvent
+import android.view.View
+import android.webkit.*
 import android.widget.ProgressBar
 import android.widget.Toast
-import androidx.core.os.BuildCompat
-import com.drake.statusbar.immersive
+import androidx.appcompat.app.AlertDialog
+import androidx.appcompat.app.AppCompatActivity
+import java.net.URISyntaxException
 
 
 class MainActivity : AppCompatActivity() {
-    var webView:WebView?=null
+    protected val GALLERY1REQUESTCODE = 220
+    var webView: WebView? = null
     var WEB_URL = BuildConfig.HOST
-    var progressBar:ProgressBar?=null
+    var progressBar: ProgressBar? = null
     var TAG = "test"
+    var appSchemaList = listOf("whatsapp:", "https://t.me/", "https://www.facebook.com")
+    protected var uploadMessageAboveL: ValueCallback<Array<Uri>>? = null
+    protected var uploadMessage: ValueCallback<Uri>? = null
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
-         initWebView()
+        initWebView()
     }
 
-    fun initWebView(){
+    fun initWebView() {
         webView = findViewById<WebView>(R.id.myWeb)
         progressBar = findViewById(R.id.progressBar1)
-        val webClient = object : WebViewClient(){
+        val webClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 return super.shouldOverrideUrlLoading(view, url)
             }
@@ -43,18 +44,26 @@ class MainActivity : AppCompatActivity() {
                 //处理intent协议
                 //处理intent协议
                 //whatsapp://send/?phone=6283165367506
+                //https://t.me/     telegram
                 var newUrl = request?.url?.toString()
-                if (newUrl?.startsWith("whatsapp:")==true) {
+                Log.d(TAG, "shouldOverrideUrlLoading: $newUrl")
+                val find = appSchemaList.find {
+                    newUrl?.startsWith(it) == true
+                }
+                if (null != find) {
                     val intent: Intent
                     try {
-                        Log.d(TAG, "shouldOverrideUrlLoading: $newUrl")
                         intent = Intent(Intent.ACTION_VIEW, Uri.parse(newUrl))
-                            startActivity(intent)
+                        startActivity(intent)
                         return true
                     } catch (e: URISyntaxException) {
                         e.printStackTrace()
-                    }catch (e:ActivityNotFoundException){
-                        Toast.makeText(this@MainActivity, "whatsapp not installed", Toast.LENGTH_SHORT).show()
+                    } catch (e: ActivityNotFoundException) {
+                        Toast.makeText(
+                            this@MainActivity,
+                            "whatsapp not installed",
+                            Toast.LENGTH_SHORT
+                        ).show()
                         return true
                     }
                 }
@@ -73,7 +82,7 @@ class MainActivity : AppCompatActivity() {
 
         //下面这些直接复制就好
         webView?.webViewClient=webClient
-        webView?.webChromeClient = object :WebChromeClient(){
+        webView?.webChromeClient = object :WebChromeClient() {
             override fun onProgressChanged(view: WebView?, newProgress: Int) {
                 super.onProgressChanged(view, newProgress)
                 if (newProgress == 100) {
@@ -82,6 +91,34 @@ class MainActivity : AppCompatActivity() {
                     progressBar?.visibility = View.VISIBLE;
                     progressBar?.progress = newProgress;
                 }
+            }
+
+            override fun onShowFileChooser(
+                webView: WebView?,
+                filePathCallback: ValueCallback<Array<Uri>>?,
+                fileChooserParams: FileChooserParams?
+            ): Boolean {
+                uploadMessageAboveL = filePathCallback
+                //调用系统相机或者相册
+                //调用系统相机或者相册
+                uploadPicture()
+                return true
+            }
+
+            override fun onJsAlert(
+                view: WebView?,
+                url: String?,
+                message: String?,
+                result: JsResult?
+            ): Boolean {
+                val b = AlertDialog.Builder(this@MainActivity)
+                b.setMessage(message)
+                b.setPositiveButton(
+                    android.R.string.ok
+                ) { _, _ -> result?.confirm() }
+                b.setCancelable(false)
+                b.create().show()
+                return false
             }
         }
 
@@ -117,18 +154,61 @@ class MainActivity : AppCompatActivity() {
         webView?.fitsSystemWindows = true
         webView?.setLayerType(View.LAYER_TYPE_HARDWARE,null)
         webView?.loadUrl(WEB_URL)
+        Log.d(TAG, "load url: $WEB_URL")
     }
 
     override fun onKeyDown(keyCode: Int, event: KeyEvent?): Boolean {
         if (keyCode==KeyEvent.KEYCODE_BACK){
-            if (webView!!.canGoBack()){
+            if (webView!!.canGoBack()) {
                 webView!!.goBack()  //返回上一个页面
                 return true
-            }else{
+            } else {
                 finish()
                 return true
             }
         }
         return false
+    }
+
+    protected fun uploadPicture() {
+        val i = Intent(Intent.ACTION_PICK, null)
+        i.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
+        startActivityForResult(i, GALLERY1REQUESTCODE)
+    }
+
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == GALLERY1REQUESTCODE) {
+            if (uploadMessage == null && uploadMessageAboveL == null) {
+                return
+            }
+            //取消拍照或者图片选择时,返回null,否则<input file> 就是没有反应
+            if (resultCode != RESULT_OK) {
+                if (uploadMessage != null) {
+                    uploadMessage!!.onReceiveValue(null)
+                    uploadMessage = null
+                }
+                if (uploadMessageAboveL != null) {
+                    uploadMessageAboveL!!.onReceiveValue(null)
+                    uploadMessageAboveL = null
+                }
+            } else {
+                var imageUri: Uri? = null
+                when (requestCode) {
+                    GALLERY1REQUESTCODE -> if (data != null) {
+                        imageUri = data.data
+                    }
+                }
+                //上传文件
+                if (uploadMessage != null) {
+                    uploadMessage!!.onReceiveValue(imageUri)
+                    uploadMessage = null
+                }
+                if (uploadMessageAboveL != null) {
+                    uploadMessageAboveL!!.onReceiveValue(arrayOf<Uri>(imageUri!!))
+                    uploadMessageAboveL = null
+                }
+            }
+        }
     }
 }
