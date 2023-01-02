@@ -152,7 +152,10 @@ class MainActivity : AppCompatActivity() {
         webSettings.setGeolocationEnabled(true) // 是否使用地理位置
 
         webView?.fitsSystemWindows = true
-        webView?.setLayerType(View.LAYER_TYPE_HARDWARE,null)
+        webView?.setLayerType(View.LAYER_TYPE_HARDWARE, null)
+        if (BuildConfig.DEBUG) {
+            WebView.setWebContentsDebuggingEnabled(true)
+        }
         webView?.loadUrl(WEB_URL)
         Log.d(TAG, "load url: $WEB_URL")
     }
