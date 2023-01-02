@@ -90,7 +90,7 @@ android {
             applicationId "com.ot.louren.xk"
         }
         omg {
-            buildConfigField "String", "HOST", "\"https://omnicommediagroupsd.com/#/pages/login/login?isapp=1/\""
+            buildConfigField "String", "HOST", "\"https://omnicomtz.com/#/pages/login/login?isapp=1/\""
             applicationId "com.xt.omg.mk"
         }
     }
