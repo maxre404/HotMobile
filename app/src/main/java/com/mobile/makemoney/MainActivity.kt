@@ -150,7 +150,7 @@ class MainActivity : AppCompatActivity() {
         webSettings.allowFileAccess = true // 设置可以访问文件
 
         webSettings.setGeolocationEnabled(true) // 是否使用地理位置
-
+        webSettings.mixedContentMode = WebSettings.MIXED_CONTENT_COMPATIBILITY_MODE;
         webView?.fitsSystemWindows = true
         webView?.setLayerType(View.LAYER_TYPE_HARDWARE, null)
         if (BuildConfig.DEBUG) {
