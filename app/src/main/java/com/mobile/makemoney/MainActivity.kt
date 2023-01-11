@@ -125,7 +125,9 @@ class MainActivity : AppCompatActivity() {
         var webSettings = webView!!.settings
         webSettings.javaScriptEnabled = true  // 开启 JavaScript 交互
 //        webSettings.setAppCacheEnabled(true) // 启用或禁用缓存
-        webSettings.cacheMode = WebSettings.LOAD_DEFAULT // 只要缓存可用就加载缓存, 哪怕已经过期失效 如果缓存不可用就从网络上加载数据
+        webSettings.cacheMode = WebSettings.LOAD_NO_CACHE // 只要缓存可用就加载缓存, 哪怕已经过期失效 如果缓存不可用就从网络上加载数据
+//        webSettings.cacheMode = WebSettings.LOAD_DEFAULT // 只要缓存可用就加载缓存, 哪怕已经过期失效 如果缓存不可用就从网络上加载数据
+        webSettings.domStorageEnabled = true // 启用或禁用DOM缓存
 //        webSettings.setAppCachePath(cacheDir.path) // 设置应用缓存路径
 
         // 缩放操作
@@ -141,7 +143,6 @@ class MainActivity : AppCompatActivity() {
         }
 
         webSettings.javaScriptCanOpenWindowsAutomatically = true // 支持通过JS打开新窗口
-        webSettings.domStorageEnabled = true // 启用或禁用DOM缓存
         webSettings.setSupportMultipleWindows(true) // 设置WebView是否支持多窗口
 
         // 设置自适应屏幕, 两者合用
