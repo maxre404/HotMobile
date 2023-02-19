@@ -2,6 +2,8 @@ package com.mobile.makemoney
 
 import android.content.ActivityNotFoundException
 import android.content.Intent
+import android.content.pm.ActivityInfo
+import android.content.res.Configuration
 import android.net.Uri
 import android.net.http.SslError
 import android.os.Build
@@ -10,11 +12,13 @@ import android.provider.MediaStore
 import android.util.Log
 import android.view.KeyEvent
 import android.view.View
+import android.view.WindowManager
 import android.webkit.*
 import android.widget.ProgressBar
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
+import androidx.constraintlayout.widget.ConstraintLayout
 import java.net.URISyntaxException
 
 
@@ -27,6 +31,10 @@ class MainActivity : AppCompatActivity() {
     var appSchemaList = listOf("whatsapp:", "https://t.me/", "https://www.facebook.com")
     protected var uploadMessageAboveL: ValueCallback<Array<Uri>>? = null
     protected var uploadMessage: ValueCallback<Uri>? = null
+    private var mCustomView: View? = null
+    private var mRootLayout: ConstraintLayout? = null
+
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -35,6 +43,7 @@ class MainActivity : AppCompatActivity() {
 
     fun initWebView() {
         webView = findViewById<WebView>(R.id.myWeb)
+        mRootLayout = findViewById(R.id.rootLayout)
         progressBar = findViewById(R.id.progressBar1)
         val webClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
@@ -119,6 +128,29 @@ class MainActivity : AppCompatActivity() {
                 b.setCancelable(false)
                 b.create().show()
                 return false
+            }
+
+            override fun onShowCustomView(view: View?, callback: CustomViewCallback?) {
+                if (mCustomView != null) {
+                    return;
+                }
+                mCustomView = view;
+                mRootLayout?.addView(mCustomView);
+                webView?.visibility = View.GONE;
+                requestedOrientation = ActivityInfo.SCREEN_ORIENTATION_LANDSCAPE;
+                super.onShowCustomView(view, callback)
+            }
+
+            override fun onHideCustomView() {
+                webView?.setVisibility(View.VISIBLE);
+                if (mCustomView == null) {
+                    return;
+                }
+                mCustomView?.setVisibility(View.GONE);
+                mRootLayout?.removeView(mCustomView);
+                mCustomView = null;
+                setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_UNSPECIFIED);
+                super.onHideCustomView()
             }
         }
 
@@ -213,6 +245,21 @@ class MainActivity : AppCompatActivity() {
                     uploadMessageAboveL = null
                 }
             }
+        }
+    }
+
+    override fun onConfigurationChanged(config: Configuration) {
+        super.onConfigurationChanged(config)
+        when (config.orientation) {
+            Configuration.ORIENTATION_LANDSCAPE -> {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+                window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+            }
+            Configuration.ORIENTATION_PORTRAIT -> {
+                window.clearFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
+                window.addFlags(WindowManager.LayoutParams.FLAG_FORCE_NOT_FULLSCREEN)
+            }
+            else -> {}
         }
     }
 }
