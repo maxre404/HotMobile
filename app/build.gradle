@@ -97,6 +97,10 @@ android {
             buildConfigField "String", "HOST", "\"https://e-creatoerzw.com/#/pages/views/login/index?isapp=1\""
             applicationId "com.ex.creator.tg"
         }
+        earoch {
+            buildConfigField "String", "HOST", "\"https://earoch.com/\""
+            applicationId "com.kg.earoch.mg"
+        }
     }
     applicationVariants.all { variant ->
         variant.outputs.all {
