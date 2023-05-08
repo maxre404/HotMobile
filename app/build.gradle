@@ -98,7 +98,7 @@ android {
             applicationId "com.ex.creator.tg"
         }
         earoch {
-            buildConfigField "String", "HOST", "\"https://earoch.com/\""
+            buildConfigField "String", "HOST", "\"https://minere9.com//\""
             applicationId "com.kg.earoch.mg"
         }
     }
