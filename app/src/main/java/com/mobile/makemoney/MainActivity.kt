@@ -23,7 +23,7 @@ import java.net.URISyntaxException
 
 
 class MainActivity : AppCompatActivity() {
-    protected val GALLERY1REQUESTCODE = 220
+    private val GALLERY1REQUESTCODE = 220
     var webView: WebView? = null
     var WEB_URL = BuildConfig.HOST
     var progressBar: ProgressBar? = null
@@ -84,8 +84,33 @@ class MainActivity : AppCompatActivity() {
                 handler: SslErrorHandler?,
                 error: SslError?
             ) {
-//                super.onReceivedSslError(view, handler, error)
-                handler?.proceed()
+                sslErrorHandler(error, handler)
+            }
+
+            private fun sslErrorHandler(
+                error: SslError?,
+                handler: SslErrorHandler?
+            ) {
+                val builder = AlertDialog.Builder(this@MainActivity)
+                var message = "SSL Certificate error."
+                when (error!!.primaryError) {
+                    SslError.SSL_UNTRUSTED -> message = "The certificate authority is not trusted."
+                    SslError.SSL_EXPIRED -> message = "The certificate has expired."
+                    SslError.SSL_IDMISMATCH -> message = "The certificate Hostname mismatch."
+                    SslError.SSL_NOTYETVALID -> message = "The certificate is not yet valid."
+                }
+                message += " Do you want to continue anyway?"
+
+                builder.setTitle("SSL Certificate Error")
+                builder.setMessage(message)
+                builder.setPositiveButton(
+                    "continue"
+                ) { _, _ -> handler?.proceed() }
+                builder.setNegativeButton(
+                    "cancel"
+                ) { _, _ -> handler?.cancel() }
+                val dialog = builder.create()
+                dialog.show()
             }
         }
 
@@ -142,7 +167,7 @@ class MainActivity : AppCompatActivity() {
             }
 
             override fun onHideCustomView() {
-                webView?.setVisibility(View.VISIBLE);
+                webView?.visibility = View.VISIBLE;
                 if (mCustomView == null) {
                     return;
                 }
@@ -206,7 +231,7 @@ class MainActivity : AppCompatActivity() {
         return false
     }
 
-    protected fun uploadPicture() {
+    private fun uploadPicture() {
         val i = Intent(Intent.ACTION_PICK, null)
         i.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "image/*")
         startActivityForResult(i, GALLERY1REQUESTCODE)

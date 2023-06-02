@@ -20,7 +20,7 @@ android {
         applicationId "com.mobile.makemoney"
         minSdk 21
         targetSdk 32
-        versionCode 17
+        versionCode 19
         versionName "1.0."+versionCode
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -101,7 +101,7 @@ android {
         }
         earoch {
             buildConfigField "String", "HOST", "\"http://minere9.com/user/login\""
-            applicationId "com.kg.earoch.mg"
+            applicationId "com.tk.remin.mm"
         }
     }
     applicationVariants.all { variant ->
