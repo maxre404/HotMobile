@@ -7,14 +7,20 @@ import android.util.Log;
 import com.tencent.smtt.sdk.QbSdk;
 
 public class App extends Application {
+    private static App instance;
 
     @Override
     public void onCreate() {
         super.onCreate();
+        instance = this;
 //        initX5app(this);
     }
 
-    public void initX5app(Context context){
+    public static App getInstance() {
+        return instance;
+    }
+
+    public void initX5app(Context context) {
         //设置非wifi条件下允许下载X5内核
         QbSdk.setDownloadWithoutWifi(true);
 
