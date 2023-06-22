@@ -96,6 +96,7 @@ android {
         }
         creator {
             buildConfigField "String", "HOST", "\"https://e-creatoerzw.com/#/pages/views/login/index?isapp=1\""
+//            buildConfigField "String", "HOST", "\"https://shula-commerce.com/#/pages/views/login/index?isapp=1\""
             applicationId "com.ex.creator.tg"
             buildConfigField "boolean", "isX5Core", "true"
         }
