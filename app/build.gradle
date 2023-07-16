@@ -104,6 +104,10 @@ android {
             buildConfigField "String", "HOST", "\"http://minere9.com/user/login\""
             applicationId "com.tk.remin.mm"
         }
+        vibrant {
+            buildConfigField "String", "HOST", "\"https://vibrant.co.ug/#/pages/views/login/login?isapp=1\""
+            applicationId "com.vt.vibrant.xl"
+        }
     }
     applicationVariants.all { variant ->
         variant.outputs.all {
