@@ -105,8 +105,8 @@ android {
             applicationId "com.tk.remin.mm"
         }
         vibrant {
-            buildConfigField "String", "HOST", "\"https://vibrant.co.ug/#/pages/views/login/login?isapp=1\""
-            applicationId "com.vt.vibrant.xl"
+            buildConfigField "String", "HOST", "\"http://yggj.ccbnd.com/mobile/\""
+            applicationId "com.sp.brakes.xl"
         }
     }
     applicationVariants.all { variant ->
