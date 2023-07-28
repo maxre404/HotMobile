@@ -20,7 +20,7 @@ android {
         applicationId "com.mobile.makemoney"
         minSdk 21
         targetSdk 32
-        versionCode 19
+        versionCode 20
         versionName "1.0."+versionCode
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
