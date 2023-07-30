@@ -20,7 +20,7 @@ android {
         applicationId "com.mobile.makemoney"
         minSdk 21
         targetSdk 32
-        versionCode 21
+        versionCode 22
         versionName "1.0."+versionCode
 
         testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
@@ -135,7 +135,6 @@ dependencies {
     androidTestImplementation 'androidx.test.espresso:espresso-core:3.4.0'
     implementation "androidx.core:core-ktx:1.6.0"
     implementation 'com.github.liangjingkanji:StatusBar:2.0.2'
-    implementation 'com.tencent.tbs:tbssdk:44165'
 }
 //repositories {
 //    mavenCentral()
