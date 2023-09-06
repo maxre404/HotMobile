@@ -104,14 +104,18 @@ android {
             buildConfigField "String", "HOST", "\"http://minere9.com/user/login\""
             applicationId "com.tk.remin.mm"
         }
-        vibrant{
+        vibrant {
             buildConfigField "String", "HOST", "\"https://vibrant.co.ug/#/pages/views/login/login?isapp=1\""
             applicationId "com.sp.brakes.xl"
         }
-        brakes{
+        brakes {
             buildConfigField "String", "HOST", "\"https://brakessupplychainco.com/#/pages/views/login/index?isapp=1\""
             applicationId "com.ok.brakes.tt"
 
+        }
+        dfj {
+            buildConfigField "String", "HOST", "\"https://dfjapp.com/#/pages/views/login/index?isapp=1\""
+            applicationId "com.xk.dfj.oi"
         }
     }
     applicationVariants.all { variant ->
