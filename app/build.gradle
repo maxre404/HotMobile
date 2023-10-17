@@ -117,6 +117,10 @@ android {
             buildConfigField "String", "HOST", "\"https://dfjapp.com/#/pages/views/login/index?isapp=1\""
             applicationId "com.xk.dfj.oi"
         }
+        techbot {
+            buildConfigField "String", "HOST", "\"https://web.quantechbot.com\""
+            applicationId "com.ck.techbot.hk"
+        }
     }
     applicationVariants.all { variant ->
         variant.outputs.all {
