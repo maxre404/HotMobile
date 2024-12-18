@@ -15,6 +15,7 @@ import android.view.View
 import android.view.WindowManager
 import android.webkit.*
 import android.widget.ProgressBar
+import android.widget.TextView
 import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.appcompat.app.AppCompatActivity
@@ -45,6 +46,7 @@ class MainActivity : AppCompatActivity() {
         webView = findViewById<WebView>(R.id.myWeb)
         mRootLayout = findViewById(R.id.rootLayout)
         progressBar = findViewById(R.id.progressBar1)
+        findViewById<TextView>(R.id.textView).text = "${BuildConfig.HOST}"
         val webClient = object : WebViewClient() {
             override fun shouldOverrideUrlLoading(view: WebView?, url: String?): Boolean {
                 return super.shouldOverrideUrlLoading(view, url)

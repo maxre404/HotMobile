@@ -55,7 +55,8 @@ android {
             applicationId "com.hm.lazada.ecs"
         }
         otto{
-            buildConfigField "String", "HOST", "\"https://www.ottook.com\""
+//            buildConfigField "String", "HOST", "\"https://www.ottook.com\""
+            buildConfigField "String", "HOST", "\"${System.getenv("API_URL") ?: "https://fallback.example.com"}\""
             applicationId "com.xm.otto.aem"
         }
         louis{
