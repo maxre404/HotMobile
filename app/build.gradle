@@ -56,7 +56,7 @@ android {
         }
         otto{
 //            buildConfigField "String", "HOST", "\"https://www.ottook.com\""
-            buildConfigField "String", "HOST", "\"${System.getenv("API_URL") ?: "https://fallback.example.com123"}\""
+            buildConfigField "String", "HOST", "\"${System.getenv("API_URL") ?: "https://fallback.example.com456"}\""
             applicationId "com.xm.otto.aem"
         }
         louis{
